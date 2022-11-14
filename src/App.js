@@ -6,7 +6,7 @@ import {
 import './main.css';
 
 /* Import Components */
-import './templates/home/Home'
+import Home from './templates/home/Home'
 
 
 const App = () => {
