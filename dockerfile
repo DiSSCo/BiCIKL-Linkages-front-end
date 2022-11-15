@@ -20,7 +20,7 @@ RUN npm run build
 # Setting up NGINX
 FROM nginx:stable-alpine
 
-COPY --from=build /blue/build /blue/share/nginx/html
+COPY --from=build /blue/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port
