@@ -1,0 +1,27 @@
+/* Main CSS file for Custom Styling */
+
+
+/* Declaring global variables */
+
+:root {
+    --main-color: #4b6c2d;
+}
+
+body {
+    overflow: hidden;
+    margin: 0;
+}
+
+.root {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: fixed;
+}
+
+
+/* Declaring global classes */
+
+.bg-primary-green {
+    background-color: var(--main-color);
+}
