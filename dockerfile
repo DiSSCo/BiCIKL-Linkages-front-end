@@ -24,7 +24,7 @@ COPY --from=build /blue/build /blue/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
 # Start application
 CMD ["nginx", "-g", "daemon off;"]
