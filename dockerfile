@@ -18,13 +18,13 @@ COPY . ./
 RUN npm run build
 
 # Setting up NGINX
-FROM nginx:stable-alpine
+# FROM nginx:stable-alpine
 
-COPY --from=build /blue/build /usr/share/nginx/html
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY --from=build /blue/build /usr/share/nginx/html
+# COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port
-EXPOSE 3000
+# # Expose port
+# EXPOSE 3000
 
-# Start application
-CMD ["nginx", "-g", "daemon off;"]
+# # Start application
+# CMD ["nginx", "-g", "daemon off;"]
