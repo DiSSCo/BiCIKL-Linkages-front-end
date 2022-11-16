@@ -3,7 +3,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import './main.css';
+import './main.scss';
 
 /* Import Components */
 import Home from './templates/home/Home'

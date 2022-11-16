@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   front_end:
+    container_name: front_end
     image: public.ecr.aws/dissco/bicikl-linkages-front-end:latest
     ports:
-      - "3000:3000"
+      - '1337:80'

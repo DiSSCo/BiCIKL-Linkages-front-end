@@ -1,9 +1,18 @@
+import { Row, Col } from 'react-bootstrap';
 import './home.scss';
+
+/* Import Components */
+import Header from 'templates/header/Header';
+import Footer from 'templates/footer/Footer';
 
 
 const Home = () => {
     return (
-        <h1> Home </h1>
+        <div>
+            <Header />
+
+            <Footer />
+        </div>
     );
 }
 
