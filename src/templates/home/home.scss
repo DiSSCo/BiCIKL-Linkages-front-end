@@ -1,2 +1,25 @@
 /* Custom styling for the Home Page */
 
+
+/* Query Form */
+
+.home_queryFormField {
+    height: 30px;
+    border-radius: 8px;
+}
+
+.home_queryFormField:focus {
+    border: 1px solid var(--main-color);
+}
+
+.home_queryFormSubmit {
+    border: 1px solid var(--main-color);
+    background-color: white;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.home_queryFormSubmit:hover {
+    background-color: var(--main-color);
+    color: white;
+}
