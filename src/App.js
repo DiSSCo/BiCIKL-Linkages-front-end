@@ -12,7 +12,7 @@ import Results from "templates/results/Results";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App h-100">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -1,9 +1,93 @@
 /* Custom styling for Results Page */
 
+
+.results_body {
+    height: Calc(100% - 140px) !important;
+}
+
+
+/* Tables */
+
+.results_titleBar {
+    height: 25px;
+}
+
+.results_titleBarSub {
+    border: 1px solid var(--main-color);
+    margin-left: 1.5%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.results_tableSection {
+    height: Calc(100% - 25px);
+    overflow: scroll;
+}
+
 .results_table {
     font-size: 14px;
 }
 
 .results_thead {
-    background-color: rgb(75, 108, 45, 0.65);
+    height: 38px;
+    background-color: #899F76;
+    position: sticky;
+    top: 0;
+}
+
+.results_tbody {
+    height: Calc(100% - 38px);
+    overflow: scroll;
+}
+
+.results_alignmentTableItem {
+    color: #899F76
+}
+
+
+/* Legend */
+
+.results_legend {
+    font-size: 14px;
+    background-color: #e6e6e6;
+    margin-top: 25px;
+    height: Calc(100% - 25px) !important;
+}
+
+.results_legendItem {
+    transition: 0.2s;
+}
+
+.results_legendItem.active {
+    border: 1px solid white;
+}
+
+.results_legendIndication {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+}
+
+.results_legendIndication.one {
+    background-color: #339966;
+}
+
+.results_legendIndication.two {
+    background-color: #00cc66;
+}
+
+.results_legendIndication.three {
+    background-color: #ffff66;
+}
+
+.results_legendIndication.four {
+    background-color: #ffcc66;
+}
+
+.results_legendIndication.five {
+    background-color: #ff8533;
+}
+
+.results_legendIndication.six {
+    background-color: #ff5c33;
 }

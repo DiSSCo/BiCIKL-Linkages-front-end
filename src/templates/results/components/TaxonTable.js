@@ -1,8 +1,8 @@
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Table } from 'react-bootstrap';
 
 
 const TaxonTable = (props) => {
-    const taxonData = props.taxonData;
+    const taxonData = props.taxonData[0];
     const formData = props.formData;
 
     const interactionTypes = {
@@ -17,7 +17,7 @@ const TaxonTable = (props) => {
     return (
         <Row>
             <Col>
-                <table class="results_table table table-striped">
+                <Table striped className="results_table">
                     <thead className="results_thead">
                         <tr>
                             <th>
@@ -27,10 +27,7 @@ const TaxonTable = (props) => {
                                 Taxon key
                             </th>
                             <th>
-                                Kingdom
-                            </th>
-                            <th>
-                                Phylum
+                                Scientific name
                             </th>
                             <th>
                                 Country of occurence
@@ -46,13 +43,10 @@ const TaxonTable = (props) => {
                                 Taxon 1
                             </td>
                             <td>
-                                {formData['taxonA']}
+                                {taxonData['taxon_id']}
                             </td>
                             <td>
-                                {taxonData[0]}
-                            </td>
-                            <td>
-                                {taxonData[1]}
+                                {taxonData['sci_name']}
                             </td>
                             <td className="fw-bold">
                                 Missing
@@ -62,7 +56,7 @@ const TaxonTable = (props) => {
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </Table>
             </Col>
         </Row>
     );
