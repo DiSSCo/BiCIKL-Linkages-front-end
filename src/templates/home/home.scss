@@ -8,8 +8,26 @@
     border-radius: 8px;
 }
 
+.home_queryFormField.taxonB {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .home_queryFormField:focus {
     border: 1px solid var(--main-color);
+}
+
+.home_queryFormWarning {
+    font-size: 14px;
+    position: absolute;
+    margin-top: 13%;
+    background-color: #ff9980;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.home_queryFormWarning.active {
+    opacity: 1;
 }
 
 .home_queryFormSubmit {
@@ -22,4 +40,22 @@
 .home_queryFormSubmit:hover {
     background-color: var(--main-color);
     color: white;
+}
+
+.home_addTaxonButton {
+    background-color: var(--main-color);
+    border: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 1px solid var(--main-color);
+    width: 30px;
+}
+
+.home_taxonBRow {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom: 2px solid #e6e6e6;
+    border-right: 2px solid #e6e6e6;
+    border-top: 2px solid #a6a6a6;
+    border-left: 2px solid #a6a6a6;
 }

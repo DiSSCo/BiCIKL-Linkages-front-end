@@ -6,6 +6,21 @@
 }
 
 
+/* Lay-ouy Options */
+
+.results_layoutOption {
+    background-color: #e6e6e6;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.results_layoutOption.active {
+    background-color: var(--main-color);
+    color: white;
+    cursor: default;
+}
+
+
 /* Tables */
 
 .results_titleBar {
@@ -17,6 +32,7 @@
     margin-left: 1.5%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    font-size: 15px;
 }
 
 .results_tableSection {
@@ -40,8 +56,45 @@
     overflow: scroll;
 }
 
+.results_tableRow {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.results_tableRow:hover {
+    background-color: #b3b3b3;
+}
+
+.results_tableRow.active {
+    background-color: #808080;
+}
+
 .results_alignmentTableItem {
     color: #899F76
+}
+
+.results_predictedColumn.high {
+    background-color: #339966;
+}
+
+.results_predictedColumn.good {
+    background-color: #00cc66;
+}
+
+.results_predictedColumn.medium {
+    background-color: #ffff66;
+}
+
+.results_predictedColumn.low {
+    background-color: #ffcc66;
+}
+
+.results_predictedColumn.very_low {
+    background-color: #ff8533;
+}
+
+.results_predictedColumn.none {
+    background-color: #ff5c33;
 }
 
 
@@ -56,10 +109,11 @@
 
 .results_legendItem {
     transition: 0.2s;
+    cursor: pointer;
 }
 
 .results_legendItem.active {
-    border: 1px solid white;
+    background-color: white;
 }
 
 .results_legendIndication {
@@ -90,4 +144,16 @@
 
 .results_legendIndication.six {
     background-color: #ff5c33;
+}
+
+
+/* Taxon Details */
+
+.results_taxonDetailsBody {
+    background-color: #e6e6e6;
+    font-size: 14px;
+}
+
+.results_taxonDetailsTitle {
+    font-size: 14px;
 }

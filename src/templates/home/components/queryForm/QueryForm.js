@@ -1,15 +1,40 @@
+import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 
 const QueryForm = (props) => {
     const form = props.form;
+    const formIndication = props.formIndication;
+    const interactionTypes = props.interactionTypes;
 
+    /* Handling adding multiple taxas in field B */
+    const [taxonB, setTaxonB] = useState('');
+    const [taxaBFields, setTaxaBFields] = useState([]);
+
+    useEffect(() => {
+        props.UpdateForm('taxonB', taxaBFields);
+    }, [taxaBFields]);
+
+    function AddTaxonBField() {
+        setTaxaBFields(current => [...current, taxonB]);
+        setTaxonB('');
+    }
+
+    function RemoveTaxonBField(index) {
+        let copyTaxonBFields = [...taxaBFields];
+
+        copyTaxonBFields.splice(index, 1);
+
+        setTaxaBFields(copyTaxonBFields);
+    }
+
+    /* Function for rendering the Submit Button */
     function RenderSubmitButton() {
         if (!props.searching) {
             return (
                 <button type="submit"
                     className="home_queryFormSubmit py-1 px-3"
-                    onClick={() => {props.SubmitForm(); props.SetSearching()}}
+                    onClick={() => props.SubmitForm()}
                 >
                     Search
                 </button>
@@ -43,44 +68,65 @@ const QueryForm = (props) => {
                         Interaction
                     </Col>
                     <Col md={{ span: 4 }}>
-                        Taxon 2 (optional)
+                        Compare to taxa (optional)
                     </Col>
                 </Row>
                 <Row className="mt-2">
-                    <Col md={{ span: 4 }}>
-                        <input className="home_queryFormField w-100"
+                    <Col md={{ span: 4 }} className="position-relative justify-content-center d-flex">
+                        <input className="home_queryFormField w-100 px-1"
                             onChange={(input) => props.UpdateForm('taxonA', input.target.value)}
                         />
+                        
+                        <div className={`home_queryFormWarning ${formIndication} w-75 text-center fw-bold p-1`}> Please insert a taxon id </div>
                     </Col>
                     <Col md={{ span: 4 }}>
                         <select className="home_queryFormField w-100"
-                            defaultValue={form['interaction']}
                             onChange={(option) => props.UpdateForm('interaction', option.target.value)}
                         >
-                            <option value="pollinatorOf">
-                                Pollinates
-                            </option>
-                            <option value="pollinatedBy">
-                                Pollinated by
-                            </option>
-                            <option value="predatorOf">
-                                Predator of
-                            </option>
-                            <option value="predatedBy">
-                                Predated by
-                            </option>
-                            <option value="parasitizes">
-                                Parasitizes
-                            </option>
-                            <option value="parasitizedBy">
-                                Parasitized by
-                            </option>
+                            {interactionTypes.length > 0 && interactionTypes.map((type, i) => {
+                                return (
+                                    <option key={i} value={type[0]}>
+                                        {type[1]}
+                                    </option>
+                                );
+                            })}
                         </select>
                     </Col>
                     <Col md={{ span: 4 }}>
-                        <input className="home_queryFormField w-100"
-                            onChange={(input) => props.UpdateForm('taxonB', input.target.value)}
-                        />
+                        <Row>
+                            <Col className="pe-0">
+                                <input className="home_queryFormField taxonB w-100 px-1"
+                                    value={taxonB}
+                                    onChange={(input) => setTaxonB(input.target.value)}
+                                />
+                            </Col>
+                            <Col className="col-md-auto p-0">
+                                <button className="home_addTaxonButton text-white fw-bold px-2 h-100"
+                                    onClick={() => AddTaxonBField()}
+                                >
+                                    +
+                                </button>
+                            </Col>
+                        </Row>
+
+                        {taxaBFields.map((taxon, i) => {
+                            return (
+                                <Row key={i} className="mt-1">
+                                    <Col className="pe-0">
+                                        <div className="home_taxonBRow px-1">
+                                            {taxon}
+                                        </div>
+                                    </Col>
+                                    <Col className="col-md-auto p-0">
+                                        <button className="home_addTaxonButton text-white fw-bold h-100"
+                                            onClick={() => RemoveTaxonBField(i)}
+                                        >
+                                            -
+                                        </button>
+                                    </Col>
+                                </Row>
+                            );
+                        })}
                     </Col>
                 </Row>
                 <Row className="mt-4">

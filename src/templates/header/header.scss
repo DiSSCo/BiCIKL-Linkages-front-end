@@ -4,3 +4,11 @@
     height: 80px;
     background-color: rgb(75, 108, 45, 0.65);
 }
+
+.header_logo {
+    z-index: 1;
+}
+
+.header_titleBar {
+    z-index: 0;
+}

@@ -11,13 +11,15 @@ const Header = () => {
             <Row className="h-100">
                 <Col md={{ span: 10, offset: 1 }} className="h-100">
                     <Row className="h-100 position-relative">
-                        <Col md={{ span: 3 }} className="h-100">
-                            <img src={BiciklLogo}
-                                alt="BiCIKL logo"
-                                className="h-100 p-3" 
-                            />
+                        <Col className="header_logo h-100 col-md-auto">
+                            <a href="https://bicikl-project.eu" target="_blank">
+                                <img src={BiciklLogo}
+                                    alt="BiCIKL logo"
+                                    className="h-100 p-3"
+                                />
+                            </a>
                         </Col>
-                        <Col className="position-absolute text-center pt-3">
+                        <Col className="header_titleBar position-absolute text-center pt-3">
                             <Row>
                                 <Col className="fw-bold">
                                     BiCIKL

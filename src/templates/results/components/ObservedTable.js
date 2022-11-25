@@ -3,6 +3,7 @@ import { Row, Col, Table } from 'react-bootstrap';
 
 const ObservedTable = (props) => {
     const observedTaxa = props.observedTaxa;
+    const chosenTaxon = props.chosenTaxon;
 
     return (
         <Row className="h-100">
@@ -27,31 +28,48 @@ const ObservedTable = (props) => {
                                         Scientific name
                                     </th>
                                     <th>
-                                        Country of occurence
+                                        Family
                                     </th>
                                     <th className="results_alignmentTableItem"> Confidence score </th>
                                 </tr>
                             </thead>
                             <tbody className="results_tbody">
-                                {observedTaxa.map((taxon, i) => {
+                                {observedTaxa.length > 0 ? observedTaxa.map((taxon, i) => {
+                                    let activeClass;
+
+                                    if (chosenTaxon['taxon_id'] === taxon['taxon_id']) {
+                                        activeClass = 'active';
+                                    }
+
                                     return (
-                                        <tr key={i}>
+                                        <tr key={i}
+                                            className={`results_tableRow ${activeClass}`}
+                                            onClick={() => props.SetChosenTaxon(taxon)}
+                                        >
                                             <td>
                                                 {`Taxon ${i + 2}`}
                                             </td>
                                             <td>
-                                                {taxon['taxon_id']}
+                                                <a href={`https://www.gbif.org/species/${taxon['taxon_id']}`} target='_blank'>
+                                                    {taxon['taxon_id']}
+                                                </a>
                                             </td>
                                             <td>
                                                 {taxon['sci_name']}
                                             </td>
-                                            <td className="fw-bold">
-                                                Missing
+                                            <td>
+                                                {taxon['fam']}
                                             </td>
                                             <td />
                                         </tr>
                                     );
-                                })}
+                                })
+                                    : <tr>
+                                        <td>
+                                            No observations found
+                                        </td> <td /> <td /> <td /> <td />
+                                    </tr>
+                                }
                             </tbody>
                         </Table>
                     </Col>

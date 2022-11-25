@@ -8,6 +8,7 @@ import './main.scss';
 /* Import Components */
 import Home from './templates/home/Home'
 import Results from "templates/results/Results";
+import Test from "templates/home/Test";
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </Router>
     </div>
