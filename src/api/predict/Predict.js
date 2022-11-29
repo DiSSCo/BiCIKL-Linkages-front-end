@@ -2,8 +2,6 @@ import axios from 'axios';
 
 
 function Predict(formData, callback) {
-    console.log(formData);
-
     axios({
         method: "post",
         url: 'predict',

@@ -12,7 +12,7 @@ const Header = () => {
                 <Col md={{ span: 10, offset: 1 }} className="h-100">
                     <Row className="h-100 position-relative">
                         <Col className="header_logo h-100 col-md-auto">
-                            <a href="https://bicikl-project.eu" target="_blank">
+                            <a href="https://bicikl-project.eu" rel="noreferrer" target="_blank">
                                 <img src={BiciklLogo}
                                     alt="BiCIKL logo"
                                     className="h-100 p-3"

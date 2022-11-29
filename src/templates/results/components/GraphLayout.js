@@ -20,21 +20,16 @@ const GraphLayout = (props) => {
         links: []
     };
 
-    const nodeTracker = [];
     const keyNodeTracker = [targetTaxon['taxon_id']];
-    const linkTracker = [];
 
     /* For each observed taxon, add to graph data */
     if (results['Predicted'].length > 0) {
         results['Predicted'].forEach((taxon, _i) => {
             graphData['nodes'].push({
-                id: taxon['taxon_id'], 
+                id: taxon['taxon_id'],
                 name: taxon['sci_name']
             });
             graphData['links'].push({ source: taxon['taxon_id'], target: targetTaxon['taxon_id'], name: 'test' })
-
-            nodeTracker.push(taxon['taxon_id']);
-            linkTracker.push(`${taxon['taxon_id']}-${targetTaxon['taxon_id']}`);
         });
     }
 
@@ -47,18 +42,10 @@ const GraphLayout = (props) => {
             }, Process);
 
             function Process(result) {
-                console.log(result);
+                /* Do something */
             }
         }
     }
-
-    // const graphData = {
-    //     nodes: [{ id: 'a' }, { id: 'b' }, { id: 'c' }],
-    //     links: [
-    //         { source: 'a', target: 'b' },
-    //         { source: 'c', target: 'a' }
-    //     ]
-    // };
 
     return (
         <Row className="h-100">

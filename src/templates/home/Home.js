@@ -32,10 +32,6 @@ const Home = () => {
     
 
     /* Form Handling */
-    const [form, setForm] = useState({
-        interaction: 'pollinates',
-        taxonB: []
-    });
     const [formIndication, setFormIndication] = useState();
 
     useEffect(() => {
@@ -46,17 +42,8 @@ const Home = () => {
         }
     }, [formIndication])
 
-    function UpdateForm(field, value) {
-        const copyForm = { ...form };
-
-        copyForm[[field]] = value;
-
-        setForm(copyForm);
-    }
-
-    /* Function for checking contents of Query Form */
-    function CheckForm() {
-        if (!form['taxonA']) {
+    function CheckForm(formData) {
+        if (!formData['taxonA']) {
             setFormIndication('active');
 
             return false;
@@ -65,29 +52,29 @@ const Home = () => {
         }
     }
 
-    function SubmitForm() {
-        if (CheckForm()) {
+    function SubmitForm(formData) {
+        if (CheckForm(formData)) {
             setSearching(true);
 
-            if (form['taxonB'].length > 0) {
+            if (formData['taxonB'].length > 0) {
                 const request_body = {
-                    relation: form['interaction'],
+                    relation: formData['interaction'],
                     is_subject: true,
-                    taxon_id: form['taxonA'],
-                    check: form['taxonB'],
+                    taxon_id: formData['taxonA'],
+                    check: formData['taxonB'],
                     confidence: 0
                 }
 
                 Predict(request_body, Process);
             } else {
-                PredictInteraction(form, Process);
+                PredictInteraction(formData, Process);
             }
 
             function Process(result) {
                 navigate('/results', {
                     state: {
                         results: result,
-                        formData: form
+                        formData: formData
                     }
                 });
             }
@@ -101,13 +88,11 @@ const Home = () => {
             <Container>
                 <Row className="mt-5">
                     <Col md={{ span: 10, offset: 1 }}>
-                        <QueryForm form={form}
-                            searching={searching}
-                            formIndication={formIndication}
+                        <QueryForm  searching={searching}
                             interactionTypes={interactionTypes}
+                            formIndication={formIndication}
 
-                            UpdateForm={(field, value) => UpdateForm(field, value)}
-                            SubmitForm={() => SubmitForm()}
+                            SubmitForm={(formData) => SubmitForm(formData)}
                             SetSearching={() => setSearching(true)}
                         />
                     </Col>

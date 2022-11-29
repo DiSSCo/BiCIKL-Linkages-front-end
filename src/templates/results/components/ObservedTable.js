@@ -50,7 +50,7 @@ const ObservedTable = (props) => {
                                                 {`Taxon ${i + 2}`}
                                             </td>
                                             <td>
-                                                <a href={`https://www.gbif.org/species/${taxon['taxon_id']}`} target='_blank'>
+                                                <a href={`https://www.gbif.org/species/${taxon['taxon_id']}`} rel="noreferrer" target='_blank'>
                                                     {taxon['taxon_id']}
                                                 </a>
                                             </td>

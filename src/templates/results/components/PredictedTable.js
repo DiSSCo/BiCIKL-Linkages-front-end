@@ -9,24 +9,31 @@ const PredictedTable = (props) => {
     function RenderTaxaRows() {
         const taxaRows = [];
 
+        function CheckConfidence(confidence) {
+            let confidenceClass;
+
+            if (confidence <= 1 && confidence >= 0.95) {
+                confidenceClass = 'high';
+            } else if (confidence <= 0.949 && confidence >= 0.7) {
+                confidenceClass = 'good';
+            } else if (confidence <= 0.699 && confidence >= 0.5) {
+                confidenceClass = 'medium';
+            } else if (confidence <= 0.499 && confidence >= 0.3) {
+                confidenceClass = 'low';
+            } else if (confidence <= 0.299 && confidence >= 0.01) {
+                confidenceClass = 'very_low';
+            } else {
+                confidenceClass = 'none';
+            }
+
+            return confidenceClass;
+        }
+
         if (predictedTaxa.length > 0) {
             predictedTaxa.forEach((taxon, i) => {
-                let confidenceClass;
                 let confidence = taxon['confidence'];
 
-                if (confidence <= 1 && confidence >= 0.95) {
-                    confidenceClass = 'high';
-                } else if (confidence <= 0.949 && confidence >= 0.7) {
-                    confidenceClass = 'good';
-                } else if (confidence <= 0.699 && confidence >= 0.5) {
-                    confidenceClass = 'medium';
-                } else if (confidence <= 0.499 && confidence >= 0.3) {
-                    confidenceClass = 'low';
-                } else if (confidence <= 0.299 && confidence >= 0.01) {
-                    confidenceClass = 'very_low';
-                } else {
-                    confidenceClass = 'none';
-                }
+                const confidenceClass = CheckConfidence(confidence);
 
                 let activeClass;
 
@@ -46,7 +53,7 @@ const PredictedTable = (props) => {
                             }
                         </td>
                         <td>
-                            <a href={`https://www.gbif.org/species/${taxon['taxon_id']}`} target='_blank'>
+                            <a href={`https://www.gbif.org/species/${taxon['taxon_id']}`} rel="noreferrer" target='_blank'>
                                 {taxon['taxon_id']}
                             </a>
                         </td>

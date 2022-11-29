@@ -59,7 +59,7 @@ const TaxonTable = (props) => {
                                         Taxon 1
                                     </td>
                                     <td>
-                                        <a href={`https://www.gbif.org/species/${taxonData['taxon_id']}`} target='_blank'>
+                                        <a href={`https://www.gbif.org/species/${taxonData['taxon_id']}`} rel="noreferrer" target='_blank'>
                                             {taxonData['taxon_id']}
                                         </a>
                                     </td>
