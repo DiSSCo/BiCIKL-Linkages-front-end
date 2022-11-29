@@ -6,28 +6,28 @@ const PredictedTable = (props) => {
     const observedCount = props.observedCount;
     const chosenTaxon = props.chosenTaxon;
 
+    function CheckConfidence(confidence) {
+        let confidenceClass;
+
+        if (confidence <= 1 && confidence >= 0.95) {
+            confidenceClass = 'high';
+        } else if (confidence <= 0.949 && confidence >= 0.7) {
+            confidenceClass = 'good';
+        } else if (confidence <= 0.699 && confidence >= 0.5) {
+            confidenceClass = 'medium';
+        } else if (confidence <= 0.499 && confidence >= 0.3) {
+            confidenceClass = 'low';
+        } else if (confidence <= 0.299 && confidence >= 0.01) {
+            confidenceClass = 'very_low';
+        } else {
+            confidenceClass = 'none';
+        }
+
+        return confidenceClass;
+    }
+
     function RenderTaxaRows() {
         const taxaRows = [];
-
-        function CheckConfidence(confidence) {
-            let confidenceClass;
-
-            if (confidence <= 1 && confidence >= 0.95) {
-                confidenceClass = 'high';
-            } else if (confidence <= 0.949 && confidence >= 0.7) {
-                confidenceClass = 'good';
-            } else if (confidence <= 0.699 && confidence >= 0.5) {
-                confidenceClass = 'medium';
-            } else if (confidence <= 0.499 && confidence >= 0.3) {
-                confidenceClass = 'low';
-            } else if (confidence <= 0.299 && confidence >= 0.01) {
-                confidenceClass = 'very_low';
-            } else {
-                confidenceClass = 'none';
-            }
-
-            return confidenceClass;
-        }
 
         if (predictedTaxa.length > 0) {
             predictedTaxa.forEach((taxon, i) => {
