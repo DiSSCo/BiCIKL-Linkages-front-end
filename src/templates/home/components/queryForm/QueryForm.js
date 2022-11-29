@@ -3,7 +3,6 @@ import { Row, Col } from 'react-bootstrap';
 
 
 const QueryForm = (props) => {
-    const form = props.form;
     const formIndication = props.formIndication;
     const interactionTypes = props.interactionTypes;
 
@@ -26,6 +25,23 @@ const QueryForm = (props) => {
         copyTaxonBFields.splice(index, 1);
 
         setTaxaBFields(copyTaxonBFields);
+    }
+
+    /* Function for rendering the Interaction Types as select options */
+    function RenderInteractionOptions() {
+        const interactionOptions = [];
+
+        Object.entries(interactionTypes).forEach((interactionTypeList) => {
+            interactionTypeList[1].forEach((interactionType, i) => {
+                interactionOptions.push(
+                    <option key={interactionTypeList[0] + i} value={interactionType[0]}>
+                        {interactionType[1]}
+                    </option>
+                );
+            });
+        });
+
+        return interactionOptions;
     }
 
     /* Function for rendering the Submit Button */
@@ -76,20 +92,14 @@ const QueryForm = (props) => {
                         <input className="home_queryFormField w-100 px-1"
                             onChange={(input) => props.UpdateForm('taxonA', input.target.value)}
                         />
-                        
+
                         <div className={`home_queryFormWarning ${formIndication} w-75 text-center fw-bold p-1`}> Please insert a taxon id </div>
                     </Col>
                     <Col md={{ span: 4 }}>
                         <select className="home_queryFormField w-100"
                             onChange={(option) => props.UpdateForm('interaction', option.target.value)}
                         >
-                            {interactionTypes.length > 0 && interactionTypes.map((type, i) => {
-                                return (
-                                    <option key={i} value={type[0]}>
-                                        {type[1]}
-                                    </option>
-                                );
-                            })}
+                            {RenderInteractionOptions()}
                         </select>
                     </Col>
                     <Col md={{ span: 4 }}>
