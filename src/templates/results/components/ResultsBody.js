@@ -90,7 +90,7 @@ const ResultsBody = (props) => {
                     <Col md={{ span: 10, offset: 1 }} className="h-100">
                         <Row className="mt-5">
                             <Col className="fw-bold">
-                                Results
+                                {`Results / ${formData['interactionType']}`}
                             </Col>
                             <Col className="col-md-auto">
                                 <Row>

@@ -29,7 +29,7 @@ const Home = () => {
             setInteractionTypes(result['Interactions']);
         }
     }, [])
-    
+
 
     /* Form Handling */
     const [formIndication, setFormIndication] = useState();
@@ -71,12 +71,16 @@ const Home = () => {
             }
 
             function Process(result) {
-                navigate('/results', {
-                    state: {
-                        results: result,
-                        formData: formData
-                    }
-                });
+                if (result) {
+                    navigate('/results', {
+                        state: {
+                            results: result,
+                            formData: formData
+                        }
+                    });
+                } else {
+                    console.log(result);
+                }
             }
         }
     }
@@ -88,7 +92,7 @@ const Home = () => {
             <Container>
                 <Row className="mt-5">
                     <Col md={{ span: 10, offset: 1 }}>
-                        <QueryForm  searching={searching}
+                        <QueryForm searching={searching}
                             interactionTypes={interactionTypes}
                             formIndication={formIndication}
 

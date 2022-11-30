@@ -3,16 +3,18 @@ import { Row, Col } from 'react-bootstrap';
 
 
 const QueryForm = (props) => {
-    const { formIndication, interactionTypes} = props;
+    const { formIndication, interactionTypes } = props;
 
     /* Function for rendering the Interaction Types as select options */
-    function RenderInteractionOptions() {
+    function RenderInteractionOptions(setInteractionType) {
         const interactionOptions = [];
 
         Object.entries(interactionTypes).forEach((interactionTypeList) => {
             interactionTypeList[1].forEach((interactionType, i) => {
                 interactionOptions.push(
-                    <option key={interactionTypeList[0] + i} value={interactionType[0]}>
+                    <option key={interactionTypeList[0] + i} value={interactionType[0]}
+                        onClick={() => setInteractionType(interactionTypeList[0])}
+                    >
                         {interactionType[1]}
                     </option>
                 );
@@ -67,7 +69,8 @@ const QueryForm = (props) => {
                 <Formik
                     initialValues={{
                         taxonA: "",
-                        interaction: "",
+                        interaction: '',
+                        interactionType: '',
                         dummyTaxon: "",
                         taxonB: []
                     }}
@@ -95,7 +98,7 @@ const QueryForm = (props) => {
                                             Choose interaction
                                         </option>
 
-                                        {RenderInteractionOptions()}
+                                        {RenderInteractionOptions((interactionType) => { console.log('test'); values.interactionType = interactionType })}
                                     </Field>
                                 </Col>
                                 <Col md={{ span: 4 }}>
@@ -111,7 +114,7 @@ const QueryForm = (props) => {
                                                     <Col className="col-md-auto p-0">
                                                         <button className="home_addTaxonButton text-white fw-bold px-2 h-100"
                                                             type="button"
-                                                            onClick={() => {push(values.dummyTaxon); values.dummyTaxon = ''}}
+                                                            onClick={() => { push(values.dummyTaxon); values.dummyTaxon = '' }}
                                                         >
                                                             +
                                                         </button>
