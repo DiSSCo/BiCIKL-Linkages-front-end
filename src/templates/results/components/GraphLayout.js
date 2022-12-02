@@ -91,40 +91,40 @@ const GraphLayout = (props) => {
                 PredictInteraction({
                     interaction: interactionMethod,
                     taxonA: node['id']
-                }, Process);
+                }, node, interactionMethod, CheckNodes);
+            }
+        }
 
-                /* Check if nodes and links exist, otherwise add them */
-                function Process(result) {
-                    /* Push node to key nodes */
-                    const copyKeyNodeTracker = [...keyNodeTracker, node['id']];
+        /* Check if nodes and links exist, otherwise add them */
+        function CheckNodes(result, node, interactionMethod) {
+            /* Push node to key nodes */
+            const copyKeyNodeTracker = [...keyNodeTracker, node['id']];
 
-                    setKeyNodeTracker(copyKeyNodeTracker);
+            setKeyNodeTracker(copyKeyNodeTracker);
 
-                    /* Extend graph nodes and links */
-                    const copyNodeTracker = { ...nodeTracker };
-                    const copyLinkTracker = { ...linkTracker };
+            /* Extend graph nodes and links */
+            const copyNodeTracker = { ...nodeTracker };
+            const copyLinkTracker = { ...linkTracker };
 
-                    for (const [, taxon] of Object.entries(result['Predicted'])) {
-                        if (!copyNodeTracker[taxon['taxon_id']]) {
-                            copyNodeTracker[taxon['taxon_id']] = {
-                                id: taxon['taxon_id'],
-                                name: taxon['sci_name'],
-                                interaction: interactionMethod
-                            }
-                        }
-
-                        if (!copyLinkTracker[`${taxon['taxon_id']}-${node['id']}`]) {
-                            copyLinkTracker[`${taxon['taxon_id']}-${node['id']}`] = {
-                                source: taxon['taxon_id'],
-                                target: node['id']
-                            }
-                        }
+            for (const [, taxon] of Object.entries(result['Predicted'])) {
+                if (!copyNodeTracker[taxon['taxon_id']]) {
+                    copyNodeTracker[taxon['taxon_id']] = {
+                        id: taxon['taxon_id'],
+                        name: taxon['sci_name'],
+                        interaction: interactionMethod
                     }
+                }
 
-                    setNodeTracker(copyNodeTracker);
-                    setLinkTracker(copyLinkTracker);
+                if (!copyLinkTracker[`${taxon['taxon_id']}-${node['id']}`]) {
+                    copyLinkTracker[`${taxon['taxon_id']}-${node['id']}`] = {
+                        source: taxon['taxon_id'],
+                        target: node['id']
+                    }
                 }
             }
+
+            setNodeTracker(copyNodeTracker);
+            setLinkTracker(copyLinkTracker);
         }
 
         return (
