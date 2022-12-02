@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-function PredictInteraction(formData, callback) {
+function PredictInteraction(formData, node, interactionMethod, callback) {
     if (formData['taxonA']) {
         const endPoint = `${formData['interaction']}/${formData['taxonA']}`;
 
@@ -13,7 +13,7 @@ function PredictInteraction(formData, callback) {
                 'Content-Type': 'application/json'
             }
         }).then(function (result) {
-            callback(result['data']);
+            callback(result['data'], node, interactionMethod);
         }).catch(error => {
             console.warn(error);
             /* To be replaced by logger */
