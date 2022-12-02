@@ -91,7 +91,7 @@ const GraphLayout = (props) => {
                 PredictInteraction({
                     interaction: interactionMethod,
                     taxonA: node['id']
-                }, node, interactionMethod, CheckNodes);
+                }, CheckNodes, node, interactionMethod);
             }
         }
 
