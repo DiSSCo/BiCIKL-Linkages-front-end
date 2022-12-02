@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-function PredictInteraction(formData, node, interactionMethod, callback) {
+function PredictInteraction(formData, callback, node = null, interactionMethod = null ) {
     if (formData['taxonA']) {
         const endPoint = `${formData['interaction']}/${formData['taxonA']}`;
 
