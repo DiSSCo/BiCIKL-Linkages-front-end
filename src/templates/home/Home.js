@@ -56,6 +56,9 @@ const Home = () => {
         if (CheckForm(formData)) {
             setSearching(true);
 
+            formData['interactionType'] = formData['interaction'].substring(0, formData['interaction'].indexOf(","));
+            formData['interaction'] = formData['interaction'].split(',')[1];
+
             if (formData['taxonB'].length > 0) {
                 const request_body = {
                     relation: formData['interaction'],
@@ -78,8 +81,6 @@ const Home = () => {
                             formData: formData
                         }
                     });
-                } else {
-                    console.log(result);
                 }
             }
         }

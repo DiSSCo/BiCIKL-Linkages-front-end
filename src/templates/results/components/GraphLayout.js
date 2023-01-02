@@ -8,8 +8,7 @@ import GetInteractions from 'api/interactions/GetInteractions';
 
 
 const GraphLayout = (props) => {
-    const results = props.results;
-    const formData = props.formData;
+    const {results, formData} = props;
 
     const targetTaxon = results['Input'][0];
 

@@ -6,15 +6,13 @@ const QueryForm = (props) => {
     const { formIndication, interactionTypes } = props;
 
     /* Function for rendering the Interaction Types as select options */
-    function RenderInteractionOptions(setInteractionType) {
+    function RenderInteractionOptions() {
         const interactionOptions = [];
 
         Object.entries(interactionTypes).forEach((interactionTypeList) => {
             interactionTypeList[1].forEach((interactionType, i) => {
                 interactionOptions.push(
-                    <option key={interactionTypeList[0] + i} value={interactionType[0]}
-                        onClick={() => setInteractionType(interactionTypeList[0])}
-                    >
+                    <option key={interactionTypeList[0] + i} value={[interactionTypeList[0], interactionType[0]]}>
                         {interactionType[1]}
                     </option>
                 );
@@ -57,23 +55,38 @@ const QueryForm = (props) => {
                 </Row>
                 <Row className="mt-4">
                     <Col md={{ span: 4 }}>
-                        Taxon 1
+                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Use this field to define a base taxon whose interactions will be checked based upon the chosen 
+                            interaction method (and possible other taxa)"
+                        >
+                            Taxon 1
+                        </div>
                     </Col>
                     <Col md={{ span: 4 }}>
-                        Interaction
+                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Choose an option from this list to define an interaction method that will be used to search for interaction 
+                            related taxa (or to compare to the optional taxa)"
+                        >
+                            Interaction
+                        </div>
                     </Col>
                     <Col md={{ span: 4 }}>
-                        Compare to taxa (optional)
+                        <div data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Use this optional field to define taxa that will be checked against the base taxon using the chosen interaction 
+                            method (only taxa defined in this field will be taken into account in the results screen). Add by using the + button"
+                        >
+                            Compare to taxa (optional)
+                        </div>
                     </Col>
                 </Row>
                 <Formik
                     initialValues={{
                         taxonA: "",
                         interaction: '',
-                        interactionType: '',
                         dummyTaxon: "",
                         taxonB: []
                     }}
+                    enableReinitialize
                     onSubmit={async (values) => {
                         await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -86,6 +99,7 @@ const QueryForm = (props) => {
                                 <Col md={{ span: 4 }} className="position-relative justify-content-center d-flex">
                                     <Field name="taxonA" type="text"
                                         className="home_queryFormField w-100 px-1"
+                                        placeholder="1314881"
                                     />
 
                                     <div className={`home_queryFormWarning ${formIndication} w-75 text-center fw-bold p-1`}> Please insert a taxon id </div>
@@ -98,8 +112,10 @@ const QueryForm = (props) => {
                                             Choose interaction
                                         </option>
 
-                                        {RenderInteractionOptions((interactionType) => { console.log('test'); values.interactionType = interactionType })}
+                                        {RenderInteractionOptions()}
                                     </Field>
+
+                                    <Field name="interactionType" type="hidden" value="pollinates" />
                                 </Col>
                                 <Col md={{ span: 4 }}>
                                     <FieldArray name="taxonB">
@@ -109,6 +125,7 @@ const QueryForm = (props) => {
                                                     <Col className="pe-0">
                                                         <Field className="home_queryFormField taxonB w-100 px-1"
                                                             name="dummyTaxon"
+                                                            placeholder="2928234"
                                                         />
                                                     </Col>
                                                     <Col className="col-md-auto p-0">
@@ -157,7 +174,7 @@ const QueryForm = (props) => {
                     )}
                 </Formik>
             </Col>
-        </Row>
+        </Row >
     );
 }
 
