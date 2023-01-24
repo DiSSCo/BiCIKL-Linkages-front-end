@@ -18,6 +18,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     const [searching, setSearching] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
 
     /* Get Interaction Types */
     const [interactionTypes, setInteractionTypes] = useState([]);
@@ -56,9 +57,13 @@ const Home = () => {
         if (CheckForm(formData)) {
             setSearching(true);
 
+            formData['interactionType'] = formData['interaction'].substring(0, formData['interaction'].indexOf(","));
+
+            formData['interaction'] = formData['interaction'].split(',')[1];
+
             if (formData['taxonB'].length > 0) {
                 const request_body = {
-                    relation: formData['interaction'],
+                    relation: formData['interactionType'],
                     is_subject: true,
                     taxon_id: formData['taxonA'],
                     check: formData['taxonB'],
@@ -79,7 +84,8 @@ const Home = () => {
                         }
                     });
                 } else {
-                    console.log(result);
+                    setSearching(false);
+                    setErrorMessage('Something went wrong, please try again')
                 }
             }
         }
@@ -95,6 +101,7 @@ const Home = () => {
                         <QueryForm searching={searching}
                             interactionTypes={interactionTypes}
                             formIndication={formIndication}
+                            errorMessage={errorMessage}
 
                             SubmitForm={(formData) => SubmitForm(formData)}
                             SetSearching={() => setSearching(true)}
