@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 
 const QueryForm = (props) => {
-    const { formIndication, interactionTypes } = props;
+    const { formIndication, interactionTypes, errorMessage } = props;
 
     /* Function for rendering the Interaction Types as select options */
     function RenderInteractionOptions() {
@@ -82,7 +82,7 @@ const QueryForm = (props) => {
                 <Formik
                     initialValues={{
                         taxonA: "",
-                        interaction: '',
+                        interaction: 'pollinates,pollinatedBy',
                         dummyTaxon: "",
                         taxonB: []
                     }}
@@ -173,6 +173,14 @@ const QueryForm = (props) => {
                         </Form>
                     )}
                 </Formik>
+
+                {errorMessage &&
+                    <Row className="mt-4">
+                        <Col className="text-center text-danger">
+                            {errorMessage}
+                        </Col>
+                    </Row>
+                }
             </Col>
         </Row >
     );
