@@ -9,7 +9,10 @@ import './queryBuilder.scss';
 
 /* Import Icons */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
+/* Import Components */
+import SubmitButton from './SubmitButton';
 
 /* Import API */
 import GetInteractions from "api/interactions/GetInteractions";
@@ -50,31 +53,6 @@ const QueryBuilder = (props) => {
         });
 
         return interactionOptions;
-    }
-
-    /* Function for rendering the Submit Button */
-    function RenderSubmitButton() {
-        if (!searching) {
-            return (
-                <button className="query_formSubmit py-1 px-3 w-100"
-                    type="submit"
-                >
-                    <FontAwesomeIcon icon={faSearch} className="query_searchIcon me-2" />
-
-                    Search
-                </button>
-            );
-        } else {
-            return (
-                <button type="button"
-                    className="query_formSubmit py-1 px-3 w-100"
-                >
-                    <span className="spinner-border spinner-border-sm me-2" />
-
-                    Searching...
-                </button>
-            );
-        }
     }
 
     /* Function for toggling the advanced options */
@@ -201,7 +179,7 @@ const QueryBuilder = (props) => {
                                             />
                                         </Col>
                                         <Col md={{ span: 4 }} className="d-flex justify-content-center">
-                                            {RenderSubmitButton()}
+                                            <SubmitButton searching={searching} />
                                         </Col>
                                     </Row>
 
@@ -261,7 +239,7 @@ const QueryBuilder = (props) => {
                                                                 {values.taxonB.length > 0 &&
                                                                     values.taxonB.map((taxon, i) => {
                                                                         return (
-                                                                            <Row key={i} className="mt-1">
+                                                                            <Row key={taxon} className="mt-1">
                                                                                 <Col className="pe-0">
                                                                                     <Field name={`taxonB.${i}`} type="text"
                                                                                         className="query_queryFormField taxonB w-100 px-1"
