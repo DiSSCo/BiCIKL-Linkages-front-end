@@ -5,11 +5,30 @@
     height: Calc(100% - 140px) !important;
 }
 
+.results_backdrop {
+    position: absolute;
+    background-color: black;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.4s;
+    z-index: -1;
+}
+
+.results_backdrop.active {
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.results_graphMargin {
+    margin-top: 8.5%;
+}
+
 
 /* Lay-ouy Options */
 
 .results_layoutOption {
-    background-color: #e6e6e6;
+    background-color: white;
     font-size: 14px;
     cursor: pointer;
 }
@@ -22,6 +41,10 @@
 
 
 /* Tables */
+
+.results_tableMargin {
+    margin-top: 10%;
+}
 
 .results_titleBar {
     height: 25px;
@@ -46,9 +69,11 @@
 
 .results_thead {
     height: 38px;
-    background-color: #899F76;
+    background-color: var(--main-color);
     position: sticky;
     top: 0;
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
 }
 
 .results_tbody {
@@ -66,11 +91,11 @@
 }
 
 .results_tableRow.active {
-    background-color: #808080;
+    background-color: #999999;
 }
 
 .results_alignmentTableItem {
-    color: #899F76
+    color: var(--main-color);
 }
 
 .results_predictedColumn.high {
@@ -102,9 +127,8 @@
 
 .results_legend {
     font-size: 14px;
-    background-color: #e6e6e6;
-    margin-top: 25px;
     height: Calc(100% - 25px) !important;
+    border-radius: 8px;
 }
 
 .results_legendItem {
@@ -113,7 +137,7 @@
 }
 
 .results_legendItem.active {
-    background-color: white;
+    background-color: #b3b3b3;
 }
 
 .results_legendIndication {
@@ -150,10 +174,28 @@
 /* Taxon Details */
 
 .results_taxonDetailsBody {
-    background-color: #e6e6e6;
     font-size: 14px;
+    border-radius: 8px;
+    height: calc(100% - 25px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.results_taxonDetailsStripe {
+    border: 1px solid var(--main-color);
+    width: 1px;
+}
+
+.results_taxonDetailsSubStripe {
+    width: 15px;
+    border: 1px solid var(--main-color);
+    margin-left: -10%;
 }
 
 .results_taxonDetailsTitle {
     font-size: 14px;
+}
+
+.results_taxonDetailsItem {
+    font-size: 12px;
 }

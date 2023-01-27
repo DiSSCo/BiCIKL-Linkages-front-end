@@ -1,10 +1,19 @@
 /* Main CSS file for Custom Styling */
 
+.main_bg {
+    background-image: url('./webroot/img/home_bg.jpg');
+    height: Calc(100% - 60px);
+}
+
+.main_footer {
+    height: 60px;
+}
+
 
 /* Declaring global variables */
 
 :root {
-    --main-color: #4b6c2d;
+    --main-color: #66913d;
 }
 
 body {

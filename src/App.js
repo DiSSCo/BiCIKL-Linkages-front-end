@@ -12,7 +12,7 @@ import Results from "templates/results/Results";
 
 const App = () => {
   return (
-    <div className="App h-100">
+    <div className="App h-100 overflow-hidden">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

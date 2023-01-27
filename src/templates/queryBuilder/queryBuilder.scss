@@ -1,0 +1,96 @@
+/* Custom styling for the Query Builder */
+
+.query_builder {
+    z-index: 2;
+}
+
+.query_advancedToggle {
+    color: var(--main-color);
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.query_advancedToggleIcon {
+    transition: 0.4s;
+}
+
+.query_advancedToggleIcon.active {
+    transform: rotate(180deg);
+}
+
+.query_advancedTitle {
+    font-size: 15px;
+}
+
+.query_introText {
+    font-size: 14px;
+}
+
+.query_formFieldTitle {
+    font-size: 15px;
+    color: #707070;
+}
+
+.query_formField {
+    height: 30px;
+    border-radius: 8px;
+}
+
+.query_formField.taxonB {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.query_formField:focus {
+    border: 1px solid var(--main-color);
+}
+
+.query_formFieldError {
+    font-size: 13px;
+}
+
+.query_formWarning {
+    font-size: 14px;
+    position: absolute;
+    margin-top: 13%;
+    background-color: #ff9980;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.query_formWarning.active {
+    opacity: 1;
+}
+
+.query_formSubmit {
+    border: 1px solid var(--main-color);
+    background-color: white;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.query_searchIcon {
+    font-size: 14px;
+}
+
+.query_formSubmit:hover {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.query_addTaxonButton {
+    background-color: var(--main-color);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 1px solid var(--main-color);
+    width: 30px;
+}
+
+.query_taxonBRow {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom: 2px solid #e6e6e6;
+    border-right: 2px solid #e6e6e6;
+    border-top: 2px solid #a6a6a6;
+    border-left: 2px solid #a6a6a6;
+}

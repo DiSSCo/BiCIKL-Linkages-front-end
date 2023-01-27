@@ -1,4 +1,4 @@
-import { Row, Col, Table } from 'react-bootstrap';
+import { Row, Col, Table, Card } from 'react-bootstrap';
 
 
 const PredictedTable = (props) => {
@@ -86,38 +86,34 @@ const PredictedTable = (props) => {
     return (
         <Row className="h-100">
             <Col className="h-100">
-                <Row className="results_titleBar">
-                    <Col className="results_titleBarSub col-md-auto fw-bold h-100">
-                        Predicted interactions
-                    </Col>
-                </Row>
-
                 <Row className="results_tableSection">
                     <Col className="h-100">
-                        <Table striped className="results_table h-100">
-                            <thead className="results_thead">
-                                <tr>
-                                    <th>
-                                        Target taxon
-                                    </th>
-                                    <th>
-                                        Taxon key
-                                    </th>
-                                    <th>
-                                        Scientific name
-                                    </th>
-                                    <th>
-                                        Family
-                                    </th>
-                                    <th>
-                                        Confidence score
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="results_tbody">
-                                {RenderTaxaRows()}
-                            </tbody>
-                        </Table>
+                        <Card table-responsive className="p-0 m-0 h-100">
+                            <Table striped className="results_table m-0 h-100 bg-white">
+                                <thead className="results_thead">
+                                    <tr>
+                                        <th>
+                                            Predicted taxa
+                                        </th>
+                                        <th>
+                                            Taxon key
+                                        </th>
+                                        <th>
+                                            Scientific name
+                                        </th>
+                                        <th>
+                                            Family
+                                        </th>
+                                        <th>
+                                            Confidence score
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="results_tbody">
+                                    {RenderTaxaRows()}
+                                </tbody>
+                            </Table>
+                        </Card>
                     </Col>
                 </Row>
             </Col>
