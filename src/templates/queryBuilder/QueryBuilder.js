@@ -1,6 +1,5 @@
 /* Import Dependencies */
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Formik, Field, Form, FieldArray } from "formik";
 import classNames from 'classnames';
 import { Row, Col, Card } from 'react-bootstrap';
@@ -21,7 +20,6 @@ import PredictInteraction from 'api/predict/PredictInteraction';
 const QueryBuilder = (props) => {
     const { errorMessage, formData, SubmitAction, SetBackdrop } = props;
 
-    const location = useLocation();
     const [searching, setSearching] = useState(false);
 
     /* Get Interaction Types */
@@ -41,8 +39,10 @@ const QueryBuilder = (props) => {
 
         Object.entries(interactionTypes).forEach((interactionTypeList) => {
             interactionTypeList[1].forEach((interactionType, i) => {
+                const key = `${interactionType[0]}${i}`;
+
                 interactionOptions.push(
-                    <option key={interactionTypeList[0] + i} value={[interactionTypeList[0], interactionType[0]]}>
+                    <option key={key} value={[interactionTypeList[0], interactionType[0]]}>
                         {interactionType[1]}
                     </option>
                 );
@@ -75,34 +75,6 @@ const QueryBuilder = (props) => {
                 </button>
             );
         }
-    }
-
-    /* Function for rendering advanced fields */
-    function RenderAdvancedFields(values, remove) {
-        const advancedOptionsFields = [];
-
-        values.forEach((taxon, i) => {
-            advancedOptionsFields.push(
-                <Row key={i}>
-                    <Col className="pe-0">
-                        <Field name={`taxonB.${i}`} type="text"
-                            className="query_queryFormField taxonB w-100 px-1"
-                            value={taxon}
-                        />
-                    </Col>
-                    <Col className="col-md-auto p-0">
-                        <button className="query_addTaxonButton text-white fw-bold h-100"
-                            type="button"
-                            onClick={() => remove(i)}
-                        >
-                            -
-                        </button>
-                    </Col>
-                </Row>
-            );
-        });
-
-        return advancedOptionsFields;
     }
 
     /* Function for toggling the advanced options */
@@ -200,7 +172,7 @@ const QueryBuilder = (props) => {
                                 taxonA: formData ? formData['taxonA'] : '',
                                 interaction: formData ? `${formData['interactionType']},${formData['interaction']}` : 'pollinates,pollinatedBy',
                                 dummyTaxon: "",
-                                taxonB: []
+                                taxonB: formData ? formData['taxonB'] : []
                             }}
                             validate={validate}
                             enableReinitialize
@@ -286,11 +258,27 @@ const QueryBuilder = (props) => {
                                                             </Col>
 
                                                             <Col md={{ span: 5, offset: 1 }}>
-                                                                {values.taxonB.length > 0 ?
-                                                                    RenderAdvancedFields(values.taxonB, remove)
-                                                                    : formData &&
-                                                                    formData.taxonB.length > 0 &&
-                                                                    RenderAdvancedFields(formData.taxonB, remove)
+                                                                {values.taxonB.length > 0 &&
+                                                                    values.taxonB.map((taxon, i) => {
+                                                                        return (
+                                                                            <Row key={i} className="mt-1">
+                                                                                <Col className="pe-0">
+                                                                                    <Field name={`taxonB.${i}`} type="text"
+                                                                                        className="query_queryFormField taxonB w-100 px-1"
+                                                                                        value={taxon}
+                                                                                    />
+                                                                                </Col>
+                                                                                <Col className="col-md-auto p-0">
+                                                                                    <button className="query_addTaxonButton text-white fw-bold h-100"
+                                                                                        type="button"
+                                                                                        onClick={() => remove(i)}
+                                                                                    >
+                                                                                        -
+                                                                                    </button>
+                                                                                </Col>
+                                                                            </Row>
+                                                                        );
+                                                                    })
                                                                 }
                                                             </Col>
                                                         </>

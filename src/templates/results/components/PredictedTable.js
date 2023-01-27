@@ -88,7 +88,7 @@ const PredictedTable = (props) => {
             <Col className="h-100">
                 <Row className="results_tableSection">
                     <Col className="h-100">
-                        <Card table-responsive className="p-0 m-0 h-100">
+                        <Card className="p-0 m-0 h-100">
                             <Table striped className="results_table m-0 h-100 bg-white">
                                 <thead className="results_thead">
                                     <tr>

@@ -56,14 +56,14 @@ const ObservedTable = (props) => {
                                                 <td>
                                                     {taxon['fam']}
                                                 </td>
-                                                <td />
+                                                {/* <td /> */}
                                             </tr>
                                         );
                                     })
                                         : <tr>
                                             <td>
                                                 No observations found
-                                            </td> <td /> <td /> <td /> <td />
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

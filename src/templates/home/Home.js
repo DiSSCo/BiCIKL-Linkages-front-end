@@ -1,5 +1,5 @@
 /* Import Dependencies */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import './home.scss';
