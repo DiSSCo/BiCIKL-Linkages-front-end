@@ -11,7 +11,7 @@ function Predict(formData, callback) {
             'Content-Type': 'application/json'
         }
     }).then(function (result) {
-        result['data']['Observed'] = [];
+        result['data']['observed'] = [];
         console.log(result['data']);
 
         callback(result['data']);
