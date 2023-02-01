@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* Import Dependencies */
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import './home.scss';
@@ -6,111 +7,56 @@ import './home.scss';
 /* Import Components */
 import Header from 'templates/header/Header';
 import Footer from 'templates/footer/Footer';
-import QueryForm from './components/queryForm/QueryForm';
-
-/* Import API */
-import Predict from 'api/predict/Predict';
-import PredictInteraction from 'api/predict/PredictInteraction';
-import GetInteractions from 'api/interactions/GetInteractions';
+import Instructions from './components/instuctions/Instructions';
+import QueryBuilder from '../queryBuilder/QueryBuilder';
 
 
 const Home = () => {
     const navigate = useNavigate();
 
-    const [searching, setSearching] = useState(false);
+    /* Query Builder */
     const [errorMessage, setErrorMessage] = useState();
 
-    /* Get Interaction Types */
-    const [interactionTypes, setInteractionTypes] = useState([]);
-
-    useEffect(() => {
-        GetInteractions(Process);
-
-        function Process(result) {
-            setInteractionTypes(result['Interactions']);
-        }
-    }, [])
-
-
-    /* Form Handling */
-    const [formIndication, setFormIndication] = useState();
-
-    useEffect(() => {
-        if (formIndication) {
-            setTimeout(() => {
-                setFormIndication();
-            }, 3000);
-        }
-    }, [formIndication])
-
-    function CheckForm(formData) {
-        if (!formData['taxonA']) {
-            setFormIndication('active');
-
-            return false;
+    function HandleSubmit(results, formData) {
+        if (results) {
+            navigate('/results', {
+                state: {
+                    results: results,
+                    formData: formData
+                }
+            });
         } else {
-            return true;
-        }
-    }
-
-    function SubmitForm(formData) {
-        if (CheckForm(formData)) {
-            setSearching(true);
-
-            formData['interactionType'] = formData['interaction'].substring(0, formData['interaction'].indexOf(","));
-
-            formData['interaction'] = formData['interaction'].split(',')[1];
-
-            if (formData['taxonB'].length > 0) {
-                const request_body = {
-                    relation: formData['interactionType'],
-                    is_subject: true,
-                    taxon_id: formData['taxonA'],
-                    check: formData['taxonB'],
-                    confidence: 0
-                }
-
-                Predict(request_body, Process);
-            } else {
-                PredictInteraction(formData, Process);
-            }
-
-            function Process(result) {
-                if (result) {
-                    navigate('/results', {
-                        state: {
-                            results: result,
-                            formData: formData
-                        }
-                    });
-                } else {
-                    setSearching(false);
-                    setErrorMessage('Something went wrong, please try again')
-                }
-            }
+            setErrorMessage('Something went wrong, please try again')
         }
     }
 
     return (
-        <div>
-            <Header />
+        <div className="h-100">
+            <div className="main_bg">
+                <Header />
 
-            <Container>
-                <Row className="mt-5">
-                    <Col md={{ span: 10, offset: 1 }}>
-                        <QueryForm searching={searching}
-                            interactionTypes={interactionTypes}
-                            formIndication={formIndication}
-                            errorMessage={errorMessage}
+                <Container fluid>
+                    <Row className="mt-5">
+                        <Col md={{ span: 4, offset: 1 }}>
+                            <Instructions />
+                        </Col>
+                        <Col md={{ span: 5 }}>
+                            <Row>
+                                <Col md={{ span: 10, offset: 1 }}>
+                                    <QueryBuilder errorMessage={errorMessage}
+                                        SubmitAction={(results, formData) => HandleSubmit(results, formData)}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
 
-                            SubmitForm={(formData) => SubmitForm(formData)}
-                            SetSearching={() => setSearching(true)}
-                        />
-                    </Col>
-                </Row>
-            </Container>
 
-            <Footer />
+            </div>
+            <div className="main_footer">
+                <Footer />
+            </div>
         </div>
     );
 }
