@@ -24,7 +24,7 @@ const GraphLayout = (props) => {
         }
     });
 
-    const targetTaxon = results['Input'][0];
+    const targetTaxon = results['input'][0];
 
     const [interactionTypes, setInteractionTypes] = useState();
     const [nodeTracker, setNodeTracker] = useState({
@@ -48,11 +48,11 @@ const GraphLayout = (props) => {
 
     useEffect(() => {
         /* For each observed taxon, add to graph data */
-        if (results['Predicted'].length > 0) {
+        if (results['predicted'].length > 0) {
             const copyNodeTracker = { ...nodeTracker };
             const copyLinkTracker = { ...linkTracker };
 
-            results['Predicted'].forEach((taxon, _i) => {
+            results['predicted'].forEach((taxon, _i) => {
                 copyNodeTracker[taxon['taxon_id']] = {
                     id: taxon['taxon_id'],
                     name: taxon['sci_name'],
@@ -119,7 +119,7 @@ const GraphLayout = (props) => {
             const copyNodeTracker = { ...nodeTracker };
             const copyLinkTracker = { ...linkTracker };
 
-            for (const [, taxon] of Object.entries(result['Predicted'])) {
+            for (const [, taxon] of Object.entries(result['predicted'])) {
                 if (!copyNodeTracker[taxon['taxon_id']]) {
                     copyNodeTracker[taxon['taxon_id']] = {
                         id: taxon['taxon_id'],
