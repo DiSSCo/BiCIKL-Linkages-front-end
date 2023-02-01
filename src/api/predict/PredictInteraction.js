@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function PredictInteraction(formData, callback, node = null, interactionMethod = null ) {
     if (formData['taxonA']) {
-        const endPoint = `${formData['interaction']}`;
+        let endPoint = `${formData['interaction']}`;
 
         if (typeof formData['taxonA'] === 'number') {
             endPoint += `/${formData['taxonA']}`;
