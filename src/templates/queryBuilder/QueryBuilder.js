@@ -207,9 +207,11 @@ const QueryBuilder = (props) => {
                                                         Add taxa:
                                                     </div>
                                                 </Col>
-                                                <Col md={{ span: 6 }} className="query_formFieldTitle">
-                                                    To be checked:
-                                                </Col>
+                                                {values.taxonB.length > 0 &&
+                                                    <Col md={{ span: 6 }} className="query_formFieldTitle">
+                                                        To be checked:
+                                                    </Col>
+                                                }
                                             </Row>
 
                                             <Row className="mt-2">

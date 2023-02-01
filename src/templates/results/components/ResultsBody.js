@@ -17,7 +17,7 @@ const ResultsBody = (props) => {
 
     const navigate = useNavigate();
 
-    const [chosenTaxon, setChosenTaxon] = useState(results['Input'][0]);
+    const [chosenTaxon, setChosenTaxon] = useState(results['input'][0]);
 
     /* Query Builder */
     const [errorMessage, setErrorMessage] = useState();
@@ -37,9 +37,9 @@ const ResultsBody = (props) => {
 
     /* Handle filter */
     const [filter, setFilter] = useState({});
-    const [filteredPredictedTaxa, setFilteredPredictedTaxa] = useState(results['Predicted']);
+    const [filteredPredictedTaxa, setFilteredPredictedTaxa] = useState(results['predicted']);
 
-    const observedCount = results['Observed'].length;
+    const observedCount = results['observed'].length;
 
     function Filter(index, range) {
         const copyFilter = { ...filter };
@@ -77,7 +77,7 @@ const ResultsBody = (props) => {
         let newFilteredPredictedTaxa = [];
 
         if (Object.keys(filter).length > 0) {
-            results['Predicted'].forEach((taxon, i) => {
+            results['predicted'].forEach((taxon, i) => {
                 for (const [, value] of Object.entries(filter)) {
                     const check = CheckConfidence(taxon, value, i);
 
@@ -87,7 +87,7 @@ const ResultsBody = (props) => {
                 }
             });
         } else {
-            newFilteredPredictedTaxa = results['Predicted'];
+            newFilteredPredictedTaxa = results['predicted'];
         }
 
         setFilteredPredictedTaxa(newFilteredPredictedTaxa);
@@ -140,7 +140,7 @@ const ResultsBody = (props) => {
                                 <Col md={{ span: 7 }} className="h-100">
                                     <Row className="mt-1" style={{ height: '100%' }}>
                                         <Col className="h-100">
-                                            <ObservedTable observedTaxa={results['Observed']}
+                                            <ObservedTable observedTaxa={results['observed']}
                                                 chosenTaxon={chosenTaxon}
 
                                                 SetChosenTaxon={(taxon) => setChosenTaxon(taxon)}

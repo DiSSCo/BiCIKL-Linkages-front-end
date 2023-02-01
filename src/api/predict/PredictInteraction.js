@@ -3,11 +3,20 @@ import axios from 'axios';
 
 function PredictInteraction(formData, callback, node = null, interactionMethod = null ) {
     if (formData['taxonA']) {
-        const endPoint = `${formData['interaction']}/${formData['taxonA']}`;
+        const endPoint = `${formData['interaction']}`;
+
+        if (typeof formData['taxonA'] === 'number') {
+            endPoint += `/${formData['taxonA']}`;
+        }
+
+        const data = {
+            species: formData['taxonA']
+        }
 
         axios({
-            method: "get",
+            method: "post",
             url: endPoint,
+            data: data,
             responseType: 'json',
             headers: {
                 'Content-Type': 'application/json'
